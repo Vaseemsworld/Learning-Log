@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+{% extends 'learning_logs/base.html' %}
+{% block content %}
+<p>Confirm Deletion</p>
+<p>Are you sure you want to delete {{topic.text}}?</p>
+<form action="" method="post">
+  {% csrf_token %}
+  <button type="submit" name="submit">Yes,I'm sure</button>
+</form>
+<p>
+    <a href="{% url 'learning_logs:topics' %}">Cancel</a>
+</p>
+{% endblock content %}
+</body>
+</html>
