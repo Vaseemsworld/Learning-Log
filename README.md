@@ -11,10 +11,10 @@ A learning log is a personal record documenting learning experiences, goals, act
 
 ## Key Features:
 
-  **User account management
-    Post creation and management
-    Entry submission to posts
-    Editing and deleting posts
+  **User account management <br>
+    Post creation and management <br>
+    Entry submission to posts <br>
+    Editing and deleting posts <br>
     Editing and deleting entries**
 
 ## Technologies Used:
