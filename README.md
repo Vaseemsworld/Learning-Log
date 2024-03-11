@@ -19,7 +19,7 @@ A learning log is a personal record documenting learning experiences, goals, act
 
 ## Technologies Used:
 
-  **Django Framework**
+  **Django Framework** <br>
   **Python,HTML,CSS**
 
 
