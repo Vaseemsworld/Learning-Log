@@ -150,8 +150,7 @@ app_dir = getattr(config, 'appDir', app_dir_default)
 if config.is_valid_platform():
     ALLOWED_HOSTS.append('.platformsh.site')
 
-if config.appDir:
-    STATIC_ROOT = Path(app_dir) / 'static'
+STATIC_ROOT = getattr(config, 'appDir', os.path.join(BASE_DIR, 'static')) / 'static' if hasattr(config, 'appDir') else os.path.join(BASE_DIR, 'static')
 
 if config.projectEntropy:
     SECRET_KEY = config.projectEntropy
