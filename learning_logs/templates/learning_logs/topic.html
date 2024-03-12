@@ -1,31 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Learning Log</title>
-</head>
-<body>
+
+
 {% extends 'learning_logs/base.html' %}
+{% load static %}
+    <link rel="stylesheet" href="{% static 'learning_logs/styles.css' %}">
+{% block page_header %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'learning_logs:topics' %}">Topics</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ topic.text }}</li>
+    </ol>
+</nav>
+{% endblock page_header %}
 
 {% block content %}
 <h1>Topic: {{ topic.text }}</h1>
 <h3>Entries:</h3>
 <p>
-    <a href="{% url 'learning_logs:new_entry' topic.id %}">Add new entry</a>
+    <a class="newpost" href="{% url 'learning_logs:new_entry' topic.id %}">Add new entry : </a>
 </p>
-<ul>
-    {% for entry in entries %}
-    <li>
-        <p>{{ entry.date_added|date:'M d,Y H:i'}}</p>
-        <p>{{ entry.text|linebreaks }}</p>
-        <p> <a href="{% url 'learning_logs:edit_entry' entry.id %}">Edit entry</a> </p>
-        <p> <a href="{% url 'learning_logs:delete_entry' entry.id %}">Delete Entry</a> </p>
-    </li>
-    {% empty %}
-    <li>No Entries added yet.</li>
-    {% endfor %}
-</ul>
-<a href="{% url 'learning_logs:delete_topic' topic.id%}">Delete {{topic}}</a>
+
+{% for entry in entries %}
+<div class="card mb-3">
+    <h4 class="card-header">
+        {{ entry.date_added | date:'M d, Y H:i'}}
+        <small><a href="{% url 'learning_logs:edit_entry' entry.id %}">Edit Entry</a></small>
+        <small><a href="{% url 'learning_logs:delete_entry' entry.id %}">Delete</a></small>
+    </h4>
+    <div class="card-body">{{ entry.text | linebreaks }}</div>
+</div>
+{% empty %}
+    <p>No entries added yet.</p>
+{% endfor %}
+
+<a class="deletepost" href="{% url 'learning_logs:delete_topic' topic.id %}">Delete Topic</a><br>
+<button class="backbutton" onclick="goBack()">Go Back</button>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
 {% endblock content %}
-</body>
-</html>

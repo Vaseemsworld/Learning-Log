@@ -1,21 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
 {% extends 'learning_logs/base.html' %}
-{% block content %}
+{% load django_bootstrap5 %}
+{% load static %}
+    <link rel="stylesheet" href="{% static 'learning_logs/styles.css' %}">
+{% block page_header %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Topics</li>
+  </ol>
+</nav>
 <p>Confirm Deletion</p>
-<p>Are you sure you want to delete {{topic.text}}?</p>
+<p>Are you sure you want to delete '{{topic.text}}' ?</p>
+{% endblock page_header %}
+{% block content %}
 <form action="" method="post">
-  {% csrf_token %}
-  <button type="submit" name="submit">Yes,I'm sure</button>
+    {% csrf_token %}
+    {% bootstrap_button button_type="submit" content="Yes,I'm sure" %}
 </form>
-<p>
-    <a href="{% url 'learning_logs:topics' %}">Cancel</a>
-</p>
+
+<button class="backbutton" onclick="goBack()">Cancel</button>
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
 {% endblock content %}
-</body>
-</html>

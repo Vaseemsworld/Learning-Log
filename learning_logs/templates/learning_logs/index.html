@@ -2,16 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
     <title>Learning Log</title>
 </head>
 <body>
 {% extends 'learning_logs/base.html' %}
-
-{% block content %}
-
-<h1>Learning Logs</h1>
-<p>Learning log helps you keep track of your learning, for any topic you're interested.</p>
-
-{% endblock content %}
-</body>
-</html>
+{% block page_header %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Home</li>
+  </ol>
+</nav>
+<div class="p-3 mb-4 bg-light border rounded-3">
+    <div class="container-fluid py-4">
+        <h1 class="display-3">Track your learning.</h1>
+        <p class="lead">Learning log helps you keep track of your learning, for any topic you're interested.</p>
+        {% if user.is_authenticated %}
+        {% else %}
+        <a class="btn btn-primary btn-lg mt-1" href="{% url 'accounts:register' %}">Register &raquo;</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock page_header %}

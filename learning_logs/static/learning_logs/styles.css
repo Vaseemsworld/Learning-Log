@@ -1,0 +1,61 @@
+    .post-name {
+        text-decoration: none;
+        border-radius:15px;
+        text-align: center;
+        background-color: yellow;
+        margin: 0px 50px;
+        padding: 5px 20px;
+        align-items: center;
+    }
+
+    .newpost {
+        text-decoration: none;
+        border-radius:10px;
+        color: white;
+        background-color: #1e90ff;
+        margin: 10px 0px;
+        padding: 10px;
+    }
+
+    .newpost:hover {
+        background-color: darkblue;
+        color: white;
+    }
+
+    .backbutton {
+        text-decoration: none;
+        border-radius: 10px;
+        color: white;
+        background-color: #1e90ff;
+        margin: 10px 0px;
+        padding: 10px 25px;
+    }
+
+    .backbutton:hover {
+        background-color: #0d6ecd;
+        color: white;
+    }
+    .deletepost{
+        color: red;
+    }
+    .cancel-link{
+        text-decoration:none;
+        border-radius:10px;
+        margin:0px 0px;
+        padding:0px 10px;
+        color: white;
+        background-color: #0d6ecd;
+        transition:background-color 0.3s;
+    }
+    .cancel-link:hover{
+        background-color: #0000FF;
+        color:white;
+    }
+
+footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+
+       }
