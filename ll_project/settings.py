@@ -145,11 +145,7 @@ config = Config()
 
 # Set a default value for appDir if not running on Platform.sh
 app_dir_default = os.path.join(BASE_DIR, 'static')  # Set a suitable default value
-
-if hasattr(config, 'appDir'):
-    app_dir = config.appDir
-else:
-    app_dir = app_dir_default
+app_dir = getattr(config, 'appDir', app_dir_default)
 
 if config.is_valid_platform():
     ALLOWED_HOSTS.append('.platformsh.site')
