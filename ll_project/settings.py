@@ -142,6 +142,7 @@ LOGIN_URL = 'accounts:login'
 from platformshconfig import Config
 
 config = Config()
+
 # Set a default value for appDir if not running on Platform.sh
 app_dir_default = os.path.join(BASE_DIR, 'static')  # Set a suitable default value
 
@@ -173,4 +174,3 @@ DATABASES = {
         'PORT': db_settings.get('port', ''),
     },
 }
-
