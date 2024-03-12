@@ -142,22 +142,35 @@ LOGIN_URL = 'accounts:login'
 from platformshconfig import Config
 
 config = Config()
+# Set a default value for appDir if not running on Platform.sh
+app_dir_default = os.path.join(BASE_DIR, 'static')  # Set a suitable default value
+
+if hasattr(config, 'appDir'):
+    app_dir = config.appDir
+else:
+    app_dir = app_dir_default
+
 if config.is_valid_platform():
     ALLOWED_HOSTS.append('.platformsh.site')
+
 if config.appDir:
-    STATIC_ROOT = Path(config.appDir) / 'static'
+    STATIC_ROOT = Path(app_dir) / 'static'
+
 if config.projectEntropy:
     SECRET_KEY = config.projectEntropy
+
+db_settings = {}
 if not config.in_build():
     db_settings = config.credentials('database')
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': db_settings['path'],
-        'USER': db_settings['username'],
-        'PASSWORD': db_settings['password'],
-        'HOST': db_settings['host'],
-        'PORT': db_settings['port'],
+        'NAME': db_settings.get('path', ''),
+        'USER': db_settings.get('username', ''),
+        'PASSWORD': db_settings.get('password', ''),
+        'HOST': db_settings.get('host', ''),
+        'PORT': db_settings.get('port', ''),
     },
 }
+
