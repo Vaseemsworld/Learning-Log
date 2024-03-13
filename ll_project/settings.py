@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-64#26*e=q(k_5@jz81fb$nz^wja)e1n=%*rok3m=b=h6gpuzku'
+SECRET_KEY = 'wbw2i=f0=kkdyve7k(5)7nebj-1!gz8*f0)51_jcs345n1vt=@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -138,24 +138,21 @@ LOGIN_URL = 'accounts:login'
 
 
 # Platform.sh settings.
-
 from platformshconfig import Config
 
 config = Config()
 
-if config.is_valid_platform():
-    ALLOWED_HOSTS.append('.platformsh.site')
+# Update ALLOWED_HOSTS for local development
+ALLOWED_HOSTS = ['.platformsh.site'] if config.is_valid_platform() else ['localhost', '127.0.0.1']
 
-if config.appDir:
-    STATIC_ROOT = Path(config.appDir) / 'static'
+# Set STATIC_ROOT for both Platform.sh and local development
+STATIC_ROOT = Path(config.appDir) / 'static' if config.appDir else Path(__file__).resolve().parent / 'static'
 
-if config.projectEntropy:
-    SECRET_KEY = config.projectEntropy
+# Set SECRET_KEY for local development
+SECRET_KEY = config.projectEntropy if config.projectEntropy else 'wbw2i=f0=kkdyve7k(5)7nebj-1!gz8*f0)51_jcs345n1vt=@'
 
-db_settings = {}
-if not config.in_build():
-    db_settings = config.credentials('database')
-
+# Configure the database settings for both Platform.sh and local development
+db_settings = config.credentials('database') if not config.in_build() else {}
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -166,4 +163,5 @@ DATABASES = {
         'PORT': db_settings.get('port', ''),
     },
 }
+
 
